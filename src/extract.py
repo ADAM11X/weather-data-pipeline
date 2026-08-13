@@ -26,7 +26,6 @@ except ValueError :
     raise ValueError ("cities.json is not valid JSON")
 
 
-
 def get_data(cities)->list:
     results=[]
     for city in cities :
@@ -71,4 +70,4 @@ def api_call(City:str,Api_key:str)->dict|None:
 
 data = get_data(city_list['cities'])
 
-print(json.dumps(data,indent=4))
+print(type(data))
