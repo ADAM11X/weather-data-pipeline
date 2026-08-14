@@ -68,6 +68,3 @@ def api_call(City:str,Api_key:str)->dict|None:
         print(f"Unexpected error for {City}: {response.status_code}")
         return None
 
-data = get_data(city_list['cities'])
-
-print(type(data))
