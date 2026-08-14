@@ -2,7 +2,7 @@ def transform_results(results:list)->list:
     cleaned_city=[]
     for city in results:
         city_info={
-            "country_name":city.get('name'),
+            "city_name":city.get('name'),
             "country_code":city['sys'].get('country'),
             "timestamp":city.get('dt'),
             "temperature":city['main'].get('temp'),
