@@ -14,17 +14,16 @@ The pipeline fetches current weather data for 60 cities worldwide, cleans and st
 ## Technologies Used
 
 - Python
-- Pandas
 - Requests
 - pyodbc
 - SQL Server
-- T-SQL
+- SQL
 - Git
 - GitHub
 
 ## Project Structure
 
-
+```
 weather-data-pipeline/
 ├── config/
 │   └── cities.json              # List of 60 cities to track
@@ -43,7 +42,7 @@ weather-data-pipeline/
 ├── .env.example                 # API key template
 ├── .gitignore                   # Excludes .env and data files
 └── README.md                    # This file
-
+```
 
 ## Dataset
 
