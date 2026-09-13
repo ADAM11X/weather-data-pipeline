@@ -46,4 +46,4 @@ for d in clean_data:
 
 rows_inserted=insert_data(query,data_tuple)
 
-print(rows_inserted)
+print(f"Rows inserted: {rows_inserted}")

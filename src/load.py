@@ -34,21 +34,21 @@ def run_query(query:str)->list:
     return query_result
 
 def insert_data(query:str,data=None)-> int:
-    conn=pyodbc.connect(connection_string)
-    csr=conn.cursor()
-    csr.fast_executemany=True
-    csr.executemany(query,data)
-    conn.commit()
-    rows_inserted = len(data)
-    csr.close()
-    conn.close()
-
-    return rows_inserted
-
-# def truncate_table (query:str):
-#     conn=pyodbc.connect(connection_string)
-#     csr=conn.cursor()
-#     csr.execute(query)
-#     conn.commit()
-#     csr.close()
-#     conn.close()
+    try : 
+        conn=pyodbc.connect(connection_string)
+        csr=conn.cursor()
+        csr.fast_executemany=True
+        csr.executemany(query,data)
+        conn.commit()
+        rows_inserted = len(data)
+        return rows_inserted
+    except pyodbc.Error as e :
+        if conn:
+            conn.rollback()
+        print(f"failed to insert data into DB , rolled back :{e}")
+        return 0
+    finally: 
+        if csr:
+            csr.close()
+        if conn:
+            conn.close()
