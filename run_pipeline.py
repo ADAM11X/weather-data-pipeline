@@ -1,7 +1,7 @@
 
 from src.extract import get_data, city_list
 from src.transform import transform_results
-from src.load import insert_data,truncate_table 
+from src.load import insert_data
 from datetime import datetime
 
 
@@ -43,8 +43,7 @@ for d in clean_data:
     )
     data_tuple.append(row)
 
-truncate_table ("TRUNCATE TABLE WeatherData ")
-print("Cleared existing data")
+
 rows_inserted=insert_data(query,data_tuple)
 
 print(rows_inserted)

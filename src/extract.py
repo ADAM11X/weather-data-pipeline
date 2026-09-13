@@ -29,7 +29,7 @@ except ValueError :
 def get_data(cities)->list:
     results=[]
     for city in cities :
-        print(city)
+
         try :
             data=api_call(city,API_KEY)
             if data :
