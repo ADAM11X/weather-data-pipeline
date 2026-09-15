@@ -1,9 +1,13 @@
 import pyodbc 
-
+import logging
 
 SERVER: str = "localhost"
 DATABASE: str = "WeatherDataDB"
 
+logging.basicConfig(level=logging.INFO ,
+                    filename="logs/pipeline.log" ,
+                    filemode="a",
+                    format="%(asctime)s - %(levelname)s - %(message)s")
 
 connection_string = (
         "DRIVER={ODBC Driver 18 for SQL Server};"
@@ -41,11 +45,12 @@ def insert_data(query:str,data=None)-> int:
         csr.executemany(query,data)
         conn.commit()
         rows_inserted = len(data)
+        logging.info(f"Data was inserted successfully")
         return rows_inserted
     except pyodbc.Error as e :
         if conn:
             conn.rollback()
-        print(f"failed to insert data into DB , rolled back :{e}")
+        logging.error(f"failed to insert data into DB , rolled back :{e}")
         return 0
     finally: 
         if csr:

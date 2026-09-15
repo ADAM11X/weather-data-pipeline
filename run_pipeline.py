@@ -1,23 +1,27 @@
-
 from src.extract import get_data, city_list
 from src.transform import transform_results
 from src.load import insert_data
 from datetime import datetime
+import logging 
 
 
-print("Extracting data from OpenWeather API...")
+logging.basicConfig(level=logging.INFO ,
+                    filename="logs/pipeline.log" ,
+                    filemode="a",
+                    format="%(asctime)s - %(levelname)s - %(message)s")
+
+
+logging.info("Extracting data from OpenWeather API...")
 raw_data = get_data(city_list['cities'])
-print(f"Extracted data for {len(raw_data)} cities")
+logging.info(f"Extracted data for {len(raw_data)} cities")
 
 
-
-print("Transforming data...")
+logging.info("Transforming data...")
 clean_data = transform_results(raw_data)
-print(f"Transformed {len(clean_data)} records")
+logging.info(f"Transformed {len(clean_data)} records")
 
 
-
-print("Loading data into SQL Server...")
+logging.info("Loading data into SQL Server...")
 
 
 query= """
@@ -25,7 +29,6 @@ INSERT INTO WeatherData
 ([city_name],[country_code],[timestamp],[temperature],[feels_like],[humidity],[wind_speed],[weather_description])
 VALUES (?,?,?,?,?,?,?,?)
 """
-
 
 
 data_tuple=[]
@@ -46,4 +49,4 @@ for d in clean_data:
 
 rows_inserted=insert_data(query,data_tuple)
 
-print(f"Rows inserted: {rows_inserted}")
+logging.info(f"Rows inserted: {rows_inserted}")
