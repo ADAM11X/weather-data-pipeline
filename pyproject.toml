@@ -1,0 +1,22 @@
+[project]
+name = "weather-data-pipeline"
+version = "1.2.0"
+description = " ETL pipeline for weather data using OpenWeather API and SQL Server "
+readme = "README.md"
+authors = [
+    { name = "ADAM11X" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "pandas>=3.0.6",
+    "pyodbc>=5.3.0",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+weather-data-pipeline = "weather_data_pipeline:main"
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
